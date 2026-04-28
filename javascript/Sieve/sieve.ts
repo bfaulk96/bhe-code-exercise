@@ -15,7 +15,7 @@ export class Sieve {
    */
   private logarithmicUpperBound(n: number): number {
     const k = n + 1;
-    return Math.floor(k * (Math.log(k) + Math.log(Math.log(k))));
+    return Math.ceil(k * (Math.log(k) + Math.log(Math.log(k))));
   }
 
   /**
