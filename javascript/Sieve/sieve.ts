@@ -20,9 +20,9 @@ export class Sieve {
 
   /**
    * Get an array of all primes up to and including n.
-   * @param maxToCheck - The number to get the primes up to and including.
    * @param n - The nth prime to return.
-   * @returns An array of all primes up to and including n.
+   * @param maxToCheck - The number to get the primes up to and including.
+   * @returns the nth prime up to the maxToCheck, or -1 if the nth prime is not found within the maxToCheck.
    */
   private getNthPrimeUpToMax(n: number, maxToCheck: number): number {
     if (n === 0) return 2; // 1st prime is 2. This is a special edge-case, and it's important we handle it early so we can eliminate even numbers later.
