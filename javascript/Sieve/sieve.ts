@@ -71,7 +71,7 @@ export class Sieve {
   NthPrime(n: number): number {
     if (!Number.isSafeInteger(n)) throw new Error("n must be a safe integer");
     if (n < 0) throw new Error("n must not be negative");
-    if (n > 200_000_000) throw new Error("Only the first 100,000,000 primes are supported");
+    if (n > 200_000_000) throw new Error("Only the first 200,000,000 primes are supported");
     // For the Sieve of Eratosthenes, the upper bound can be estimated as p(n) ​< n(log(n) + log(log(n)))
     //   Unfortunately, this bound does not work for small values of n, so I am using a simpler overestimate for n < 5
     const maxCheck = n < 5 ? this.simpleUpperBound(n) : this.logarithmicUpperBound(n);
