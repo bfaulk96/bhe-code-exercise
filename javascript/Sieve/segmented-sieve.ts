@@ -117,7 +117,7 @@ export class SegmentedSieve extends Sieve {
   NthPrime(n: number): number {
     if (!Number.isSafeInteger(n)) throw new Error("n must be a safe integer");
     if (n < 0) throw new Error("n must not be negative");
-    if (n > 600_000_000) throw new Error("Only the first 600,000,000 primes are supported");
+    if (n > 1_000_000_000) throw new Error("Only the first 1,000,000,000 primes are supported");
     const maxCheck = this.getUpperBound(n);
     return this.getNthPrimeUpToMax(n, maxCheck);
   }

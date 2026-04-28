@@ -1,6 +1,6 @@
 import { SegmentedSieve } from "./segmented-sieve";
 
-describe.skip("SegmentedSieve", () => {
+describe("SegmentedSieve", () => {
   // We can do this because the Sieve class is a singleton, and there are no side effects
   let sieve: SegmentedSieve;
   beforeAll(() => {
@@ -11,8 +11,8 @@ describe.skip("SegmentedSieve", () => {
     expect(() => sieve.NthPrime(-1)).toThrow("n must not be negative");
   });
 
-  test("should throw an error if n is greater than 600,000,000", () => {
-    expect(() => sieve.NthPrime(600_000_001)).toThrow("Only the first 600,000,000 primes are supported");
+  test.skip("should throw an error if n is greater than 1,000,000,000", () => {
+    expect(() => sieve.NthPrime(1_000_000_001)).toThrow("Only the first 1,000,000,000 primes are supported");
   });
 
   test("should work for small values of n", () => {
@@ -75,5 +75,20 @@ describe.skip("SegmentedSieve", () => {
   test("400000000th prime should be 8_736_028_073", () => {
     // Takes ~17-18 seconds and ~150MB max memory on my machine
     expect(sieve.NthPrime(400_000_000)).toBe(8_736_028_073);
+  });
+
+  test.skip("500000000th prime should be 11_037_271_769", () => {
+    // Takes ~22-24 seconds and ~150MB max memory on my machine
+    expect(sieve.NthPrime(500_000_000)).toBe(11_037_271_769);
+  });
+
+  test.skip("600000000th prime should be 13_359_555_439", () => {
+    // Takes ~27-29 seconds and ~150MB max memory on my machine
+    expect(sieve.NthPrime(600_000_000)).toBe(13_359_555_439);
+  });
+
+  test.skip("1000000000th prime should be 22_801_763_513", () => {
+    // Takes ~48-50 seconds and ~150MB max memory on my machine
+    expect(sieve.NthPrime(1_000_000_000)).toBe(22_801_763_513);
   });
 });
