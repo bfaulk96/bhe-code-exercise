@@ -8,7 +8,7 @@ describe("Sieve", () => {
   });
 
   test("should throw an error if n is less than 0", () => {
-    expect(() => sieve.NthPrime(-1)).toThrow("n must be greater than 0");
+    expect(() => sieve.NthPrime(-1)).toThrow("n must not be negative");
   });
 
   test("should throw an error if n is greater than 100,000,000", () => {

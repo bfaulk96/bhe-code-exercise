@@ -53,10 +53,12 @@ export class Sieve {
 
     // Iterate through the *odd numbers* in the sieve and count the number of primes up to the maxToCheck. Once we reach the nth prime, return it.
     // Starts at the index of prime 3, which is 1 (since we've already checked index 0 as a special edge-case).
-    let count = 0;
+    let primeIndex = 1;
     for (let i = 3; i <= maxToCheck; i += 2) {
-      if (compositeFlags[i] === 0) count++;
-      if (count === n) return i;
+      if (compositeFlags[i] === 0) {
+        if (primeIndex === n) return i;
+        primeIndex++;
+      }
     }
 
     return -1;
