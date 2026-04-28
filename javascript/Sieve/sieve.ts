@@ -41,15 +41,18 @@ export class Sieve {
     for (let i = 3; i <= limit; i += 2) {
       // if the number is prime, mark all of its multiples as not prime (if composite, we've already marked its multiples as composite as well)
       if (compositeFlags[i] === 0) {
+        // Define the step so we don't have to recalculate it every loop iteration.
+        // Since we're only checking odd numbers, we can multiply by 2 to get the next multiple.
+        const step = 2 * i;
         // Start at the square of the prime, since all smaller multiples would have already been marked as composite.
-        for (let j = i * i; j <= maxToCheck; j += i) {
+        for (let j = i * i; j <= maxToCheck; j += step) {
           compositeFlags[j] = 1;
         }
       }
     }
 
-    // Iterate through the *odd numbers* in the sieve and count the number of primes up to the maxToCheck.
-    // Once we reach the nth prime, return it.
+    // Iterate through the *odd numbers* in the sieve and count the number of primes up to the maxToCheck. Once we reach the nth prime, return it.
+    // Starts at the index of prime 3, which is 1 (since we've already checked index 0 as a special edge-case).
     let count = 0;
     for (let i = 3; i <= maxToCheck; i += 2) {
       if (compositeFlags[i] === 0) count++;
@@ -61,7 +64,7 @@ export class Sieve {
 
   NthPrime(n: number): number {
     if (!Number.isSafeInteger(n)) throw new Error("n must be a safe integer");
-    if (n < 0) throw new Error("n must be greater than 0");
+    if (n < 0) throw new Error("n must not be negative");
     if (n > 100_000_000) throw new Error("Only the first 100,000,000 primes are supported");
     // For the Sieve of Eratosthenes, the upper bound can be estimated as p(n) ​< n(log(n) + log(log(n)))
     //   Unfortunately, this bound does not work for small values of n, so I am using a simpler overestimate for n < 5

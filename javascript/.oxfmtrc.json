@@ -1,1 +1,5 @@
-{}
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "printWidth": 120,
+  "ignorePatterns": ["dist/**", "node_modules/**", ".vscode/**", ".cursor/**", ".gitignore"]
+}
