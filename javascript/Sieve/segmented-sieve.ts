@@ -46,6 +46,7 @@ export class SegmentedSieve extends Sieve {
 
     // Theoretically can be adjusted to trade off memory for speed, though in practice this kind of seemed like the best of both
     const segmentOddCount = 8_000_000;
+    // Even though we only check odd numbers, our range goes *UP* to double our odd count, since it covers the actual number line
     const segmentRange = segmentOddCount * 2;
     const segment = new Uint8Array(segmentOddCount);
 
@@ -72,8 +73,9 @@ export class SegmentedSieve extends Sieve {
       // Instead of recreating the segment array every time, we can just reuse it and fill it with 0s
       segment.fill(0, 0, segmentLength);
 
-      // if we have exhausted all base primes in the basePrimes array, or (basePrimes[baseIndex])^2 > high,
-      // then there are
+      // We only want to iterate through base primes within the current segment –
+      // if `baseIndex` >= basePrimes.length, then there are no more base primes to iterate through
+      // if (basePrimes[baseIndex])^2 > high, then there are no more base primes that could be in the current segment
       while (baseIndex < basePrimes.length && basePrimes[baseIndex] * basePrimes[baseIndex] <= high) {
         const p = basePrimes[baseIndex++];
 
