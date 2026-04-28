@@ -1,18 +1,18 @@
-import { Sieve } from "./sieve";
+import { SegmentedSieve } from "./segmented-sieve";
 
-describe.skip("Sieve", () => {
+describe("SegmentedSieve", () => {
   // We can do this because the Sieve class is a singleton, and there are no side effects
-  let sieve: Sieve;
+  let sieve: SegmentedSieve;
   beforeAll(() => {
-    sieve = new Sieve();
+    sieve = new SegmentedSieve();
   });
 
   test("should throw an error if n is less than 0", () => {
     expect(() => sieve.NthPrime(-1)).toThrow("n must not be negative");
   });
 
-  test("should throw an error if n is greater than 200,000,000", () => {
-    expect(() => sieve.NthPrime(200_000_001)).toThrow("Only the first 200,000,000 primes are supported");
+  test("should throw an error if n is greater than 600,000,000", () => {
+    expect(() => sieve.NthPrime(600_000_001)).toThrow("Only the first 600,000,000 primes are supported");
   });
 
   test("should work for small values of n", () => {
@@ -49,22 +49,31 @@ describe.skip("Sieve", () => {
   });
 
   test("1000000th prime should be 15_485_867", () => {
-    // ~150MB max memory
     expect(sieve.NthPrime(1_000_000)).toBe(15_485_867);
   });
 
   test("10000000th prime should be 179_424_691", () => {
-    // Takes ~0.7-0.82 seconds to run on my machine, ~200MB max memory usage
+    // Takes ~0.46-0.6 second to run on my machine, and ~150MB max memory usage
     expect(sieve.NthPrime(10_000_000)).toBe(179_424_691);
   });
 
   test("100000000th prime should be 2_038_074_751", () => {
-    // Takes ~7-9 seconds to run on my machine, and ~1.2GB maximum memory usage
+    // Takes < 5 seconds and ~150MB max memory on my machine
     expect(sieve.NthPrime(100_000_000)).toBe(2_038_074_751);
   });
 
-  test.skip("200000000th prime should be 4_222_234_763", () => {
-    // Takes ~20-22 seconds to run on my machine, and ~2.26GB maximum memory usage
+  test("200000000th prime should be 4_222_234_763", () => {
+    // Takes ~8-9 seconds and ~150MB max memory on my machine
     expect(sieve.NthPrime(200_000_000)).toBe(4_222_234_763);
+  });
+
+  test.only("300000000th prime should be 6_461_335_171", () => {
+    // Takes ~12-14 seconds and ~150MB max memory on my machine
+    expect(sieve.NthPrime(300_000_000)).toBe(6_461_335_171);
+  });
+
+  test("400000000th prime should be 8_736_028_073", () => {
+    // Takes ~17-18 seconds and ~150MB max memory on my machine
+    expect(sieve.NthPrime(400_000_000)).toBe(8_736_028_073);
   });
 });

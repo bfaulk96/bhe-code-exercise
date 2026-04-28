@@ -1,19 +1,6 @@
 export class Sieve {
-  /**
-   * A simple overestimate for the upper bound of the sieve. Should not be used for large values of n.
-   * @param n - The index of the prime number to find.
-   * @returns An overestimate of the upper bound of the sieve.
-   */
-  private simpleUpperBound(n: number): number {
-    return 2 + n * n;
-  }
-
-  /**
-   * A logarithmic overestimate for the upper bound of the sieve. Works for values of n > 5.
-   * @param n - The index of the prime number to find.
-   * @returns An overestimate of the upper bound of the sieve.
-   */
-  private logarithmicUpperBound(n: number): number {
+  protected getUpperBound(n: number): number {
+    if (n < 5) return 11;
     const k = n + 1;
     return Math.ceil(k * (Math.log(k) + Math.log(Math.log(k))));
   }
@@ -55,7 +42,8 @@ export class Sieve {
       }
     }
 
-    // Iterate through the *odd numbers* in the sieve and count the number of primes up to the maxToCheck. Once we reach the nth prime, return it.
+    // Iterate through the *odd numbers* in the sieve and count the number of primes up to the maxToCheck.
+    // Once we reach the nth prime, return it.
     // Starts at the index of prime 3, which is 1 (since we've already checked index 0 as a special edge-case).
     let primeIndex = 1;
     for (let i = 3; i <= maxToCheck; i += 2) {
@@ -74,7 +62,7 @@ export class Sieve {
     if (n > 200_000_000) throw new Error("Only the first 200,000,000 primes are supported");
     // For the Sieve of Eratosthenes, the upper bound can be estimated as p(n) ​< n(log(n) + log(log(n)))
     //   Unfortunately, this bound does not work for small values of n, so I am using a simpler overestimate for n < 5
-    const maxCheck = n < 5 ? this.simpleUpperBound(n) : this.logarithmicUpperBound(n);
+    const maxCheck = this.getUpperBound(n);
     return this.getNthPrimeUpToMax(n, maxCheck);
   }
 }

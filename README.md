@@ -39,3 +39,20 @@ During the technical interview, your submission will be discussed, and you will 
 - Technical ability
 - Communication skills
 - Work habits and complementary skills
+
+
+## Implementation Notes
+
+This current implementation uses significant memory for finding 100,000,000th+ prime
+  - ~1.2GB max memory size for 100,000,000th prime (on my Mac)
+  - ~2.5GB max memory size for finding the 200,000,000th prime (on my Mac)
+
+This implementation could be improved/tweaked in several ways:
+- Using an odd-only bitset rather than a byte array
+  - This would cut our maximum memory usage to around 1/8 of what it is now.
+  - I chose not to do this for readability – dealing with bits in JavaScript is messy, so given the exercise expectations, I felt this to be an unnecessary tradeoff.
+- Using a segmented sieve for large numbers
+  - This approach also reduces memory pressure, as your maximum memory load is based on segment size, not n.
+  - This also leads to a much more complicated, less readable function.
+  - This is probably preferred for n > 10,000,000
+    - For n <= 10,000,000, the memory and speed difference is probably negligible enough to prefer the simpler approach
