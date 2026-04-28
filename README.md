@@ -56,6 +56,8 @@ This implementation could be improved/tweaked in several ways:
   - This also leads to a much more complicated, less readable function.
   - This is probably preferred for n > 10,000,000
     - For n <= 10,000,000, the memory and speed difference is probably negligible enough to prefer the simpler approach
+- Wheel factorization
+  - skips more candidates than the odd-only check does, but also adds complexity
 - Using a more performant language than TypeScript/JavaScript
   - Something like Golang or Rust would likely be much faster/more memory-efficient
     - I chose TypeScript for this exercise since I am applying for the Sr. UI Software Engineer role.
