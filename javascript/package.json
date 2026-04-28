@@ -1,10 +1,20 @@
 {
   "name": "sieve",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "test": "jest"
+    "build": "tsgo -p tsconfig.json",
+    "typecheck": "tsgo -p tsconfig.json --noEmit",
+    "lint": "oxlint --deny-warnings --jest-plugin --ignore-pattern dist .",
+    "format": "oxfmt --write index.ts \"Sieve/**/*.ts\" package.json tsconfig.json jest.config.cjs .oxlintrc.json .oxfmtrc.json",
+    "format:check": "oxfmt --check index.ts \"Sieve/**/*.ts\" package.json tsconfig.json jest.config.cjs .oxlintrc.json .oxfmtrc.json",
+    "test": "npm run build && jest --config jest.config.cjs"
   },
   "devDependencies": {
-    "jest": "^30.1.3"
+    "@types/jest": "^30.0.0",
+    "@typescript/native-preview": "^7.0.0-dev.20260428.1",
+    "jest": "^30.1.3",
+    "oxfmt": "^0.47.0",
+    "oxlint": "^1.62.0"
   }
 }
