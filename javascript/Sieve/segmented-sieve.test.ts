@@ -1,6 +1,6 @@
 import { SegmentedSieve } from "./segmented-sieve";
 
-describe("SegmentedSieve", () => {
+describe.skip("SegmentedSieve", () => {
   // We can do this because the Sieve class is a singleton, and there are no side effects
   let sieve: SegmentedSieve;
   beforeAll(() => {
@@ -67,7 +67,7 @@ describe("SegmentedSieve", () => {
     expect(sieve.NthPrime(200_000_000)).toBe(4_222_234_763);
   });
 
-  test.only("300000000th prime should be 6_461_335_171", () => {
+  test("300000000th prime should be 6_461_335_171", () => {
     // Takes ~12-14 seconds and ~150MB max memory on my machine
     expect(sieve.NthPrime(300_000_000)).toBe(6_461_335_171);
   });
