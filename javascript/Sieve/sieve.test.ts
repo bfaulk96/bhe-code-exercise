@@ -11,8 +11,8 @@ describe("Sieve", () => {
     expect(() => sieve.NthPrime(-1)).toThrow("n must not be negative");
   });
 
-  test("should throw an error if n is greater than 100,000,000", () => {
-    expect(() => sieve.NthPrime(100_000_001)).toThrow("Only the first 100,000,000 primes are supported");
+  test("should throw an error if n is greater than 200,000,000", () => {
+    expect(() => sieve.NthPrime(200_000_001)).toThrow("Only the first 100,000,000 primes are supported");
   });
 
   test("should work for small values of n", () => {
@@ -57,6 +57,12 @@ describe("Sieve", () => {
   });
 
   test("100000000th prime should be 2_038_074_751", () => {
+    // Takes ~7-8 seconds to run on my machine, and ~1.2GB maximum memory usage
     expect(sieve.NthPrime(100_000_000)).toBe(2_038_074_751);
+  });
+
+  test.skip("200000000th prime should be 4_222_234_763", () => {
+    // Takes ~20-22 seconds to run on my machine, and ~2.26GB maximum memory usage
+    expect(sieve.NthPrime(200_000_000)).toBe(4_222_234_763);
   });
 });
