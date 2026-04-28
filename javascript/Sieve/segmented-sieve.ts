@@ -37,7 +37,7 @@ export class SegmentedSieve extends Sieve {
    * @param maxToCheck - The number to get the primes up to and including.
    * @returns the nth prime up to the maxToCheck, or -1 if the nth prime is not found within the maxToCheck.
    */
-  private getNthPrimeUpToMaxSegmented(n: number, maxToCheck: number): number {
+  protected getNthPrimeUpToMax(n: number, maxToCheck: number): number {
     if (n === 0) return 2; // 1st prime is 2. This is a special edge-case, and it's important we handle it early so we can eliminate even numbers later.
 
     // Get all primes up to the square root of the maxToCheck
@@ -118,9 +118,7 @@ export class SegmentedSieve extends Sieve {
     if (!Number.isSafeInteger(n)) throw new Error("n must be a safe integer");
     if (n < 0) throw new Error("n must not be negative");
     if (n > 600_000_000) throw new Error("Only the first 600,000,000 primes are supported");
-    // For the Sieve of Eratosthenes, the upper bound can be estimated as p(n) ​< n(log(n) + log(log(n)))
-    //   Unfortunately, this bound does not work for small values of n, so I am using a simpler overestimate for n < 5
     const maxCheck = this.getUpperBound(n);
-    return this.getNthPrimeUpToMaxSegmented(n, maxCheck);
+    return this.getNthPrimeUpToMax(n, maxCheck);
   }
 }

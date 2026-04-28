@@ -1,4 +1,10 @@
 export class Sieve {
+  /**
+   * For the Sieve of Eratosthenes, the upper bound can be estimated as p(n) ​< n(log(n) + log(log(n)))
+   * This bound does not work for small values of n, so I am using a simple, safe overestimate for n < 5
+   * @param n - The nth prime to return.
+   * @returns the upper bound for finding the nth prime, or 11 if n < 5.
+   */
   protected getUpperBound(n: number): number {
     if (n < 5) return 11;
     const k = n + 1;
@@ -11,7 +17,7 @@ export class Sieve {
    * @param maxToCheck - The number to get the primes up to and including.
    * @returns the nth prime up to the maxToCheck, or -1 if the nth prime is not found within the maxToCheck.
    */
-  private getNthPrimeUpToMax(n: number, maxToCheck: number): number {
+  protected getNthPrimeUpToMax(n: number, maxToCheck: number): number {
     if (n === 0) return 2; // 1st prime is 2. This is a special edge-case, and it's important we handle it early so we can eliminate even numbers later.
 
     // We can reduce memory usage by storing only the odd numbers in the sieve.
@@ -59,9 +65,9 @@ export class Sieve {
   NthPrime(n: number): number {
     if (!Number.isSafeInteger(n)) throw new Error("n must be a safe integer");
     if (n < 0) throw new Error("n must not be negative");
-    if (n > 200_000_000) throw new Error("Only the first 200,000,000 primes are supported");
-    // For the Sieve of Eratosthenes, the upper bound can be estimated as p(n) ​< n(log(n) + log(log(n)))
-    //   Unfortunately, this bound does not work for small values of n, so I am using a simpler overestimate for n < 5
+    if (n > 200_000_000) {
+      throw new Error("Only the first 200,000,000 primes are supported. Use SegmentedSieve for larger values.");
+    }
     const maxCheck = this.getUpperBound(n);
     return this.getNthPrimeUpToMax(n, maxCheck);
   }

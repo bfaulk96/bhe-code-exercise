@@ -12,7 +12,9 @@ describe("Sieve", () => {
   });
 
   test("should throw an error if n is greater than 200,000,000", () => {
-    expect(() => sieve.NthPrime(200_000_001)).toThrow("Only the first 200,000,000 primes are supported");
+    expect(() => sieve.NthPrime(200_000_001)).toThrow(
+      "Only the first 200,000,000 primes are supported. Use SegmentedSieve for larger values.",
+    );
   });
 
   test("should work for small values of n", () => {
